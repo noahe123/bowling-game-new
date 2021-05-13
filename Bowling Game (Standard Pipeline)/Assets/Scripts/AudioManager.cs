@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+
         }
     }
 
@@ -41,6 +42,18 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+
+        //audio replay stuff
+        if (s.recordSound)
+        {
+            if (GetComponent<TimeBody>() != null)
+            {
+                GetComponent<TimeBody>().audioName = name;
+                GetComponent<TimeBody>().audioManager = GetComponent<AudioManager>();
+                GetComponent<TimeBody>().audioVol = s.source.volume;
+                GetComponent<TimeBody>().audioPlay = true;
+            }
+        }
     }
 
     public void Play(string name, float volume)
@@ -53,6 +66,18 @@ public class AudioManager : MonoBehaviour
         }
         s.source.volume = volume;
         s.source.Play();
+
+        //audio replay stuff
+        if (s.recordSound)
+        {
+            if (GetComponent<TimeBody>() != null)
+            {
+                GetComponent<TimeBody>().audioName = name;
+                GetComponent<TimeBody>().audioManager = GetComponent<AudioManager>();
+                GetComponent<TimeBody>().audioVol = s.source.volume;
+                GetComponent<TimeBody>().audioPlay = true;
+            }
+        }
     }
 
     public void StopPlaying(string sound)
@@ -65,5 +90,17 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.Stop();
+
+
+        //audio replay stuff
+        if (s.recordSound)
+        {
+            if (GetComponent<TimeBody>() != null)
+            {
+                GetComponent<TimeBody>().audioName = name;
+                GetComponent<TimeBody>().audioManager = GetComponent<AudioManager>();
+                GetComponent<TimeBody>().audioStop = true;
+            }
+        }
     }
 }

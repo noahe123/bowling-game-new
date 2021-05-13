@@ -36,6 +36,9 @@ public class Pokeball : MonoBehaviour
 	public Transform ball;
 	public Pins[] pins;
 
+	//audio
+	private AudioManager myAudioManager;
+
 	private void Awake()
 	{
 		pins = FindObjectsOfType<Pins>();
@@ -49,9 +52,10 @@ public class Pokeball : MonoBehaviour
 		_rigidbody.maxAngularVelocity = curveAmount * 8f;
 		/*circlingBoxX = circlingBox.x;
 		circlingBoxY = circlingBox.y;*/
+		myAudioManager = GetComponent<AudioManager>();
 
-		FindObjectOfType<AudioManager>().Play("Bowling Ambience");
-		FindObjectOfType<AudioManager>().StopPlaying("Ball Roll");
+		myAudioManager.Play("Bowling Ambience");
+		myAudioManager.StopPlaying("Ball Roll");
 		Reset();
 	}
 
@@ -162,7 +166,7 @@ public class Pokeball : MonoBehaviour
 		FindObjectOfType<CountPinsSingle>().GetComponent<CountPinsSingle>().roundCompleted();
 
 		//sounds
-		FindObjectOfType<AudioManager>().StopPlaying("Ball Roll");
+		myAudioManager.StopPlaying("Ball Roll");
 
 		//reset trail
 		transform.GetChild(2).GetComponent<TrailRenderer>().enabled = false;
@@ -269,7 +273,7 @@ public class Pokeball : MonoBehaviour
 
 	void ThrowBall(Vector2 mousePos)
 	{
-		FindObjectOfType<AudioManager>().Play("Throw");
+		myAudioManager.Play("Throw");
 
 		float differenceY = (mousePos.y - lastMouseY) / Screen.height * 100;
 
@@ -324,8 +328,8 @@ public class Pokeball : MonoBehaviour
 		if (collision.transform.tag == "Ground" && !missed)
 		{
 			float yVel = Mathf.Abs(_rigidbody.velocity.y);
-			FindObjectOfType<AudioManager>().Play("Hit Ground", yVel > 1 ? 1 : yVel);
-			FindObjectOfType<AudioManager>().Play("Ball Roll", .75f);
+			myAudioManager.Play("Hit Ground", yVel > 1 ? 1 : yVel);
+			myAudioManager.Play("Ball Roll", .75f);
 		}
 
 		if (collision.transform.tag == "Pin" && !missed)

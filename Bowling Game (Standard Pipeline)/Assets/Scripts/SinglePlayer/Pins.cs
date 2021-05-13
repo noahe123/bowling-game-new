@@ -7,12 +7,16 @@ public class Pins : MonoBehaviour {
 	public Transform pin;
 	private Rigidbody pin_rigidBody;
 	private Vector3 position_pin;
+	private AudioManager myAudioManager;
+	private GameObject ball;
 
 	// Use this for initialization
 	void Start () {
+		myAudioManager = GetComponent<AudioManager>();
 		pin = transform;
 		pin_rigidBody = GetComponent<Rigidbody>();
 		position_pin = pin.position;
+		ball = GameObject.FindGameObjectWithTag("Ball");
 	}
 
 	void OnCollisionEnter(Collision collision){
@@ -21,8 +25,8 @@ public class Pins : MonoBehaviour {
 			float playVolume = collisionSpeed / 3 > 1 ? 1 : collisionSpeed / 3;
 			if (collisionSpeed > 0)
             {
-				FindObjectOfType<AudioManager>().Play("Pin Heavy", playVolume);
-				FindObjectOfType<AudioManager>().StopPlaying("Ball Roll");
+				myAudioManager.Play("Pin Heavy", playVolume);
+				ball.GetComponent<AudioManager>().StopPlaying("Ball Roll");
 			}
 			
 		}
@@ -32,8 +36,8 @@ public class Pins : MonoBehaviour {
 			float playVolume = collisionSpeed / 3 > 1 ? 1 : collisionSpeed / 3;
 			if (collisionSpeed > 0)
 			{
-				FindObjectOfType<AudioManager>().Play("Pin Light", playVolume);
-				FindObjectOfType<AudioManager>().StopPlaying("Ball Roll");
+				myAudioManager.Play("Pin Light", playVolume);
+				ball.GetComponent<AudioManager>().StopPlaying("Ball Roll");
 			}
 		}
 	}
