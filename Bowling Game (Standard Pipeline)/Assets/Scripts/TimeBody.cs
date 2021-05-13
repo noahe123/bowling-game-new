@@ -105,7 +105,7 @@ public class TimeBody : MonoBehaviour
 		{
 			pointsInTime.RemoveAt(pointsInTime.Count - 1);
 		}
-		pointsInTime.Insert(0, new PointInTime(transform.position, transform.rotation, null, null, 0, false, false));
+		pointsInTime.Insert(0, new PointInTime(transform.position, transform.rotation, audioManager, audioName, audioVol, audioPlay, audioStop));
 
 		//reset audio vars to defaults
 		audioManager = null;

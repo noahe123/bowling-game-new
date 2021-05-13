@@ -142,6 +142,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 3194d8351f6fb684da5c86e766b20325, type: 3}
     volume: 0.75
     pitch: 1
+    spatialBlend: 0.3
     recordSound: 1
     loop: 0
     source: {fileID: 0}
@@ -149,6 +150,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9fb7c068a12ed8f478511420aab97fde, type: 3}
     volume: 0.75
     pitch: 1
+    spatialBlend: 0.3
     recordSound: 1
     loop: 0
     source: {fileID: 0}

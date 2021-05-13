@@ -9226,6 +9226,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b64702d76e0e61846ac38109a10582c9, type: 3}
     volume: 0.75
     pitch: 1
+    spatialBlend: 0.3
     recordSound: 1
     loop: 0
     source: {fileID: 0}
@@ -9233,13 +9234,15 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 19279c7dad86da04f9f53be1b6f8a84b, type: 3}
     volume: 0.75
     pitch: 1
+    spatialBlend: 0.3
     recordSound: 1
-    loop: 1
+    loop: 0
     source: {fileID: 0}
   - name: Hit Ground
     clip: {fileID: 8300000, guid: 05d98694fd7379542a5032ddfefc2aca, type: 3}
     volume: 0.75
     pitch: 1
+    spatialBlend: 0.3
     recordSound: 1
     loop: 0
     source: {fileID: 0}
@@ -9247,7 +9250,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: da30e59b2062ceb4d83bf0eaf953b8de, type: 3}
     volume: 0.75
     pitch: 1
-    recordSound: 1
+    spatialBlend: 0
+    recordSound: 0
     loop: 1
     source: {fileID: 0}
 --- !u!4 &1346008181 stripped
