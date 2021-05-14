@@ -1,57 +1,9 @@
 fileFormatVersion: 2
-guid: 1bb7f314e5049cf4aba94989dd025c8f
+guid: 1ab3b5ffa641db34cb49d26b3f8ba532
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable:
-  - first:
-      74: -623603649343465320
-    second: Scene
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_TNK001M
-    second: {fileID: 2100000, guid: 05b5687d9cbac2d4da56825dbea432ec, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_TNK001M.001
-    second: {fileID: 2100000, guid: a9908ec9f26210e459df26f61ce8f99a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: No Name
-    second: {fileID: 2100000, guid: 5b2f76039a10afa41bb1bfe9448e42d3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: material0_mshoes_0.pn
-    second: {fileID: 2100000, guid: acf81d30aa63a9b408c4315785ed37e4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: material0_mshoes_0.pn.001
-    second: {fileID: 2100000, guid: b38e7243135fe454497d6bde68a57ea1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: material1_mshoes_1.pn
-    second: {fileID: 2100000, guid: b37e85bdd8dbe17478ba6729818c13c4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: material1_mshoes_1.pn.001
-    second: {fileID: 2100000, guid: 3bfbae4cb58f12a41b998911a2544d4b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: material2_mshoes_2.pn
-    second: {fileID: 2100000, guid: 949bae274ac832a488dcae04a7f61630, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: material2_mshoes_2.pn.001
-    second: {fileID: 2100000, guid: b78abcff4ef5103449588b940f18821d, type: 2}
+  internalIDToNameTable: []
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -116,8 +68,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 9e5b12e14eec8b347a9449ecdd928297
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
