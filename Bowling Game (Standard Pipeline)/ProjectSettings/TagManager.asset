@@ -8,6 +8,7 @@ TagManager:
   - TileManager
   - Ball
   - Pin
+  - Finish Box
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,7 @@ public class CountPinsSingle : MonoBehaviour {
 	public bool round_completed;
 	private bool ball_is_out;
 	private int current_score;
-
+	public GameObject pinsReplayText;
 
 
 	void Start () {
@@ -27,32 +27,32 @@ public class CountPinsSingle : MonoBehaviour {
 	}
 
 	void OnTriggerExit (Collider collider) {
-		if (!ball_is_out) {
-			if (collider.gameObject.name == "Ball") {
+		if (!ball_is_out) 
+		{
+			if (collider.gameObject.name == "Ball") 
+			{
 				ball_is_out = true;
-				Invoke ("roundCompleted", 4);
-
+				Invoke ("roundCompleted", 3);
 			}
 		}
 	}
 
 	public void roundCompleted (){
-		
+
 		current_score = showScore ();
 		manager.gaming (current_score);
 
 		if (current_score == 10) {
-			currentScore.text = "STRIKE!!";
-			ball.increase_round ();
+			pinsReplayText.GetComponent<Text>().text = "Strike!!!";
 			manager.gaming (0);
-
-		} else {
-
-			currentScore.text = showScore ().ToString();
-
-		}	
+		} 
+		 else
+        {
+			pinsReplayText.GetComponent<Text>().text = showScore().ToString();
+		}
 		ball.Resets ();
 		ball_is_out = false;
+		ball.increase_round();
 	}
 	public int showScore(){
 
@@ -67,17 +67,15 @@ public class CountPinsSingle : MonoBehaviour {
 		return score;
 	}
 
-	void Update(){
-
-		if (current_score == 10) {
-			currentScore.text = "STRIKE!!";
-
-
+	public void SetScoreText()
+	{
+		if (current_score == 10) 
+		{
+			pinsReplayText.GetComponent<Text>().text = "Strike!!!";
 		}
-		else {
-
-			currentScore.text = showScore ().ToString();
-
-		}	
+        else
+        {
+			pinsReplayText.GetComponent<Text>().text = showScore().ToString();
+		}
 	}
 }

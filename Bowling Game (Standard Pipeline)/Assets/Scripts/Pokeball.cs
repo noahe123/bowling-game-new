@@ -36,6 +36,8 @@ public class Pokeball : MonoBehaviour
 	public Transform ball;
 	public Pins[] pins;
 
+	//Set Score Text
+
 	//audio
 	private AudioManager myAudioManager;
 
@@ -160,10 +162,6 @@ public class Pokeball : MonoBehaviour
 		curveDecayRate = curveDecayRateDefault;
 
 		curveSpeed = curveSpeedDefault;
-
-		//rules reset
-		increase_round();
-		FindObjectOfType<CountPinsSingle>().GetComponent<CountPinsSingle>().roundCompleted();
 
 		//sounds
 		myAudioManager.StopPlaying("Ball Roll");
@@ -325,6 +323,7 @@ public class Pokeball : MonoBehaviour
 	void OnCollisionEnter(Collision collision)
 	{
 
+
 		if (collision.transform.tag == "Ground" && !missed)
 		{
 			float yVel = Mathf.Abs(_rigidbody.velocity.y);
@@ -332,7 +331,11 @@ public class Pokeball : MonoBehaviour
 			myAudioManager.Play("Ball Roll", .75f);
 		}
 
-		if (collision.transform.tag == "Pin" && !missed)
+	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+		if (other.transform.tag == "Finish Box" && !missed)
 		{
 			if (hitPin == false)
 			{
@@ -343,16 +346,14 @@ public class Pokeball : MonoBehaviour
 					replay.Invoke("StartReplay", 2);
 				}
 
-
-				Invoke("Reset", 6);
-
-
+				//increment round
+				FindObjectOfType<CountPinsSingle>().GetComponent<CountPinsSingle>().Invoke("roundCompleted", 4.5f);
+				Invoke("Reset", 4.5f);
 			}
 		}
-
 	}
 
-	float DistanceToLine(Vector2 a, Vector2 b, Vector2 c)
+    float DistanceToLine(Vector2 a, Vector2 b, Vector2 c)
 	{
 		float lengthSquared = Mathf.Pow(Vector2.Distance(b, c), 2);
 		if (lengthSquared == 0.0) return Vector2.Distance(a, b);
@@ -379,7 +380,6 @@ public class Pokeball : MonoBehaviour
 	{
 		if (round % 2 == 0)
 		{
-
 			for (int i = 0; i < 10; i++)
 			{
 				if (pins[i].pin_has_fallen())
@@ -399,9 +399,7 @@ public class Pokeball : MonoBehaviour
 			}
 			for (int i = 0; i < 10; i++)
 			{
-
 				pins[i].pins_Reset();
-
 			}
 
 		}

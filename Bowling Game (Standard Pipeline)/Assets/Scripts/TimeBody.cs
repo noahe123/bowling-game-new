@@ -15,7 +15,7 @@ public class TimeBody : MonoBehaviour
 
 	Rigidbody rb;
 
-	private GameObject replayCam;
+	private GameObject replayCamParent;
 	private GameObject mainCam;
 
 	//audio tracking variables
@@ -28,11 +28,11 @@ public class TimeBody : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		recordTime = 4f;
+		recordTime = 2.5f;
 		pointsInTime = new List<PointInTime>();
 		rb = GetComponent<Rigidbody>();
 
-		replayCam = GameObject.Find("Replay Cam");
+		replayCamParent = GameObject.Find("Replay Cam Parent");
 		mainCam = GameObject.Find("Main Camera");
 	}
 
@@ -133,18 +133,19 @@ public class TimeBody : MonoBehaviour
 	{
 		isReplaying = true;
 		GetComponent<Rigidbody>().isKinematic = true;
-		replayCam.GetComponent<Camera>().enabled = true;
-		replayCam.GetComponent<AudioListener>().enabled = true;
+		replayCamParent.transform.GetChild(0).gameObject.SetActive(true);
+		replayCamParent.transform.GetChild(1).gameObject.SetActive(true);
 		mainCam.GetComponent<Camera>().enabled = false;
 		mainCam.GetComponent<AudioListener>().enabled = false;
+		FindObjectOfType<CountPinsSingle>().GetComponent<CountPinsSingle>().SetScoreText();
 	}
 
 	public void StopReplay()
 	{
 		isReplaying = false;
 		GetComponent<Rigidbody>().isKinematic = false;
-		replayCam.GetComponent<Camera>().enabled = false;
-		replayCam.GetComponent<AudioListener>().enabled = false;
+		replayCamParent.transform.GetChild(0).gameObject.SetActive(false);
+		replayCamParent.transform.GetChild(1).gameObject.SetActive(false);
 		mainCam.GetComponent<Camera>().enabled = true;
 		mainCam.GetComponent<AudioListener>().enabled = true;
 	}
