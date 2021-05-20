@@ -24,7 +24,8 @@ public class Pokeball : MonoBehaviour
 		curveThreshold = 400, bendThreshold = 10, curveDecayRate = 1.05f, minSpeedToThrow = .4f,
 		movableZoneDivisor = 1.5f, ballToFingerSpeed = 30f, maxAngVelFactor = 20f, curveSpeedDefault = 1.6f,
 		curveDecayRateDefault = 1.05f, respawnTime = 4, maxAngVelFactorDefault = 20, movableZoneX = 12,
-		screenSidleSpeed = 1f, maxCurveAmountDefault = 4, changeDirSpeed = 1, changeDirThresh = 0, angVeloChecker = 1;
+		screenSidleSpeed = 1f, maxCurveAmountDefault = 4, changeDirSpeed = 1, changeDirThresh = 0, angVeloChecker = 1,
+		motionEffectsThreshold = 1f;
 
 	//private Vector3 lastBallPos;
 
@@ -40,6 +41,9 @@ public class Pokeball : MonoBehaviour
 
 	//audio
 	private AudioManager myAudioManager;
+
+	//motion effects
+	bool motionEffectsActive = false;
 
 	private void Awake()
 	{
@@ -141,6 +145,8 @@ public class Pokeball : MonoBehaviour
 
 	void Reset()
 	{
+		ActivateMotionEffects(false);
+
 		circlingBox = new Rect(Screen.width / 2, Screen.height / 2, 0f, 0f);
 
 		curveAmount = 0f;
@@ -265,7 +271,14 @@ public class Pokeball : MonoBehaviour
 			}
 
 			curveAmount = Mathf.Clamp(curveAmount, -maxCurveAmount, maxCurveAmount);
-
+			if (Mathf.Abs(curveAmount) > motionEffectsThreshold)
+            {
+				ActivateMotionEffects(true);
+            }
+			else
+            {
+				ActivateMotionEffects(false);
+			}
 		}
 	}
 
@@ -315,6 +328,9 @@ public class Pokeball : MonoBehaviour
 			Invoke("Reset",10f);
 
 		}
+
+		//motion effects
+		ActivateMotionEffects(false);
 	}
 
 
@@ -346,10 +362,14 @@ public class Pokeball : MonoBehaviour
 					replay.Invoke("StartReplay", 2);
 				}
 
-				//increment round
 				FindObjectOfType<CountPinsSingle>().GetComponent<CountPinsSingle>().Invoke("roundCompleted", 4.5f);
 				Invoke("Reset", 4.5f);
 			}
+		}
+
+		if (other.transform.tag == "Pin" && !missed)
+		{
+			other.gameObject.GetComponent<Animator>().enabled = false;
 		}
 	}
 
@@ -380,7 +400,7 @@ public class Pokeball : MonoBehaviour
 	{
 		if (round % 2 == 0)
 		{
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < pins.Length; i++)
 			{
 				if (pins[i].pin_has_fallen())
 				{
@@ -390,14 +410,14 @@ public class Pokeball : MonoBehaviour
 		}
 		else
 		{
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < pins.Length; i++)
 			{
 				if (pins[i].pin_has_fallen())
 				{
 					pins[i].gameObject.SetActive(true);
 				}
 			}
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < pins.Length; i++)
 			{
 				pins[i].pins_Reset();
 			}
@@ -406,5 +426,22 @@ public class Pokeball : MonoBehaviour
 	}
 
 
+	//motion effects
+	void ActivateMotionEffects(bool state)
+    {
+		if (state && !motionEffectsActive)
+        {
+			motionEffectsActive = true;
+			transform.GetChild(1).GetChild(0).gameObject.SetActive(true);
+			transform.GetChild(1).GetChild(1).gameObject.GetComponent<ParticleSystem>().Play();
+
+		}
+		else if (state == false)
+        {
+			motionEffectsActive = false;
+			transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
+			transform.GetChild(1).GetChild(1).gameObject.GetComponent<ParticleSystem>().Stop();
+		}
+	}
 
 }
